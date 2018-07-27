@@ -1,0 +1,5 @@
+#! /Users/andjsmit/.rvm/rubies/ruby-2.3.4/bin/ruby
+require 'genpass/runner'
+
+runner = Genpass::Runner.new(ARGV)
+runner.run
