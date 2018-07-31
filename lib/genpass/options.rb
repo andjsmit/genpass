@@ -6,8 +6,10 @@ module Genpass
     DEFAULT_PASSTYPE = 'random'
     DEFAULT_LENGTH = 8
     DEFAULT_DIGITS = 0
+    DEFAULT_MESSAGE = 'Usage: genpass [ options ]'
+    attr_reader :pass_type, :pass_length, :pass_digits
 
-    def initilize(argv)
+    def initialize(argv)
       @pass_type = DEFAULT_PASSTYPE
       @pass_length = DEFAULT_LENGTH
       @pass_digits = DEFAULT_DIGITS
@@ -17,18 +19,18 @@ module Genpass
     private
 
     def parse(argv)
-      OptionParse.new do |opts|
-        opts.banner = 'Usage: genpass [ options ]'
+      OptionParser.new do |opts|
+        opts.banner = DEFAULT_MESSAGE
 
         opts.on('-p', '--pronouncable', 'Generate pronouncable password') do
           @pass_type = 'pronouncable'
         end
 
-        opts.on('-c', '--chars', integer, 'Number of characters') do |ccount|
+        opts.on('-c', '--chars count', Integer, 'Number of characters') do |ccount|
           @pass_length = ccount
         end
 
-        opts.on('-d', '--digits', integer, 'Number of digits') do |d|
+        opts.on('-d', '--digits count', Integer, 'Number of digits') do |d|
           @pass_digits = d
         end
 
